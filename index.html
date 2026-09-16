@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>CodeYatra — The Zero-to-Professional Full-Stack Roadmap</title>
+<meta name="description" content="A 28-phase, self-paced route from absolute beginner to job-ready full-stack developer. Search it, track it, ship it.">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230F0C1B'/%3E%3Cpath d='M50 18 C50 18 30 42 30 60 A20 20 0 0 0 70 60 C70 42 50 18 50 18 Z' fill='none' stroke='%23F6A94A' stroke-width='7'/%3E%3Ccircle cx='50' cy='58' r='8' fill='%23F6A94A'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================================================
+     SSO GATE — overlays everything until Nova Nexus confirms auth.
+     Hidden automatically when launched from Nova Nexus.
+     ============================================================ -->
+<div id="ssoGate" class="sso-gate" role="status" aria-live="polite">
+
+  <div class="sso-gate-inner" id="ssoGateLoading">
+    <div class="sso-gate-spinner" aria-hidden="true"></div>
+    <p class="sso-gate-text">Connecting to Nova Nexus…</p>
+  </div>
+
+  <div class="sso-gate-inner" id="ssoGateBlocked" hidden>
+    <div class="sso-gate-card">
+      <div class="sso-gate-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="10" width="16" height="11" rx="2"/>
+          <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+        </svg>
+      </div>
+      <h1 class="sso-gate-title">Access via Nova Nexus only</h1>
+      <p class="sso-gate-desc">
+        CodeYatra is part of the Nova Nexus ecosystem. Create your free Nova Nexus account once,
+        then every Side Website recognizes you instantly — no second signup, ever.
+      </p>
+      <a class="sso-gate-btn" href="https://nx-nova.vercel.app">
+        <span>Open Nova Nexus</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M13 6l6 6-6 6"/></svg>
+      </a>
+      <p class="sso-gate-fine">Already have an account? Sign in at Nova Nexus and launch this Side Website from your dashboard.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================== BOOT SEQUENCE ============================== -->
+<div id="boot" class="boot" role="status" aria-live="polite" aria-label="Connecting">
+  <div class="boot-noise" aria-hidden="true"></div>
+  <div class="boot-inner">
+    <div class="boot-mark" aria-hidden="true">
+      <svg viewBox="0 0 100 100" class="boot-pin">
+        <path d="M50 14 C50 14 26 42 26 63 A24 24 0 0 0 74 63 C74 42 50 14 50 14 Z" fill="none" stroke="currentColor" stroke-width="5"/>
+        <circle cx="50" cy="61" r="9" fill="currentColor"/>
+      </svg>
+    </div>
+    <div class="boot-wordmark">Code<span>Yatra</span></div>
+    <div class="boot-log" id="bootLog" aria-hidden="true"></div>
+    <div class="boot-bar-track">
+      <div class="boot-bar-fill" id="bootBarFill"></div>
+    </div>
+    <div class="boot-pct" id="bootPct">0%</div>
+    <div class="boot-hint">please wait&nbsp;&mdash;&nbsp;connecting to server</div>
+  </div>
+  <button class="boot-skip" id="bootSkip" type="button">Skip intro →</button>
+</div>
+
+<!-- ============================== SCROLL PROGRESS ============================== -->
+<div class="scrollbar" aria-hidden="true"><div class="scrollbar-fill" id="scrollFill"></div></div>
+
+<!-- ============================== HEADER ============================== -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="#top" class="wordmark" aria-label="CodeYatra home">
+      <svg viewBox="0 0 100 100" class="wordmark-pin" aria-hidden="true">
+        <path d="M50 14 C50 14 26 42 26 63 A24 24 0 0 0 74 63 C74 42 50 14 50 14 Z" fill="none" stroke="currentColor" stroke-width="7"/>
+        <circle cx="50" cy="61" r="9" fill="currentColor"/>
+      </svg>
+      <span>Code<em>Yatra</em></span>
+    </a>
+
+    <nav class="main-nav" aria-label="Primary">
+      <a href="#route">Roadmap</a>
+      <a href="#appendices">Kit&nbsp;Bag</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <div class="header-tools">
+      <div class="search-wrap">
+        <button class="search-toggle" id="searchToggle" type="button" aria-expanded="false" aria-controls="searchPanel" aria-label="Search the roadmap">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><line x1="16.2" y1="16.2" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <div class="search-panel" id="searchPanel" hidden>
+          <div class="search-field">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><line x1="16.2" y1="16.2" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <input type="search" id="searchInput" placeholder="Search phases, tools, ‘docker’, ‘big-o’…" autocomplete="off" aria-label="Search the roadmap">
+            <kbd class="search-kbd">Esc</kbd>
+          </div>
+          <div class="search-results" id="searchResults"></div>
+        </div>
+      </div>
+
+      <button class="progress-pill" id="progressPill" type="button" aria-label="View your journey progress">
+        <svg viewBox="0 0 36 36" class="progress-ring" aria-hidden="true">
+          <circle cx="18" cy="18" r="15.5" class="ring-track"/>
+          <circle cx="18" cy="18" r="15.5" class="ring-fill" id="ringFill"/>
+        </svg>
+        <span class="progress-pill-text"><strong id="progressCount">0</strong>/<span id="progressTotal">28</span></span>
+      </button>
+
+      <button class="nav-burger" id="navBurger" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav" hidden>
+    <a href="#route">Roadmap</a>
+    <a href="#appendices">Kit Bag</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============================== HERO ============================== -->
+  <section class="hero">
+    <div class="hero-sky" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <p class="hero-eyebrow">A community roadmap, not a syllabus</p>
+      <h1 class="hero-title">Zero se <span class="hero-accent">Full&#8209;Stack</span> tak.<br>Apni raftaar se.</h1>
+      <p class="hero-sub">One long, honest, sequential route from “what’s a variable” to “job‑ready developer” — computer science basics, a language, data structures, the web, a framework, a backend, databases, DevOps, security, and the career stuff nobody tells you about. Twenty‑eight phases. No shortcuts sold.</p>
+
+      <div class="hero-actions">
+        <a href="#route" class="btn btn-primary">
+          <span>Start the yatra</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <button class="btn btn-ghost" id="continueBtn" type="button" hidden>
+          <span>Continue where you left off</span>
+        </button>
+      </div>
+
+      <dl class="board" id="statBoard" aria-label="Roadmap overview">
+        <div class="board-cell">
+          <dt>Phases</dt>
+          <dd class="flap" data-target="28"><span class="flap-digit">0</span><span class="flap-digit">0</span></dd>
+        </div>
+        <div class="board-cell">
+          <dt>Parts</dt>
+          <dd class="flap" data-target="8"><span class="flap-digit">0</span></dd>
+        </div>
+        <div class="board-cell">
+          <dt>Appendices</dt>
+          <dd class="flap" data-target="6"><span class="flap-digit">0</span></dd>
+        </div>
+        <div class="board-cell">
+          <dt>Junior&#8209;ready in</dt>
+          <dd class="board-text">12&ndash;18 mo</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============================== DISCLAIMER ============================== -->
+  <section class="advisory-wrap">
+    <div class="advisory" id="advisory">
+      <div class="advisory-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 3 1 21h22L12 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><line x1="12" y1="9.5" x2="12" y2="14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="17.2" r="1" fill="currentColor"/></svg>
+      </div>
+      <div class="advisory-body">
+        <p class="advisory-title">Yatra Advisory — read before you board</p>
+        <p>This is a <strong>vibe‑coder’s map, not a professional certification.</strong> It’s a free, community‑style roadmap put together for people teaching themselves to build — not an accredited course, not a hiring rubric, and not a promise of a job. Please don’t submit it as proof of readiness to a recruiter or treat “I finished CodeYatra” as equivalent to a degree, bootcamp, or verified credential. Use it to learn, build messy things, and enjoy the ride. Take the actual hiring decisions to real interviews, real portfolios, and real humans.</p>
+      </div>
+      <button class="advisory-close" id="advisoryClose" type="button" aria-label="Dismiss advisory">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================== HOW TO USE + PRINCIPLES ============================== -->
+  <section class="briefing" id="briefing">
+    <div class="briefing-inner">
+      <div class="briefing-col" id="howToUseCol">
+        <p class="section-eyebrow">Before you board</p>
+        <h2>How to read this map</h2>
+        <div class="prose" id="howToUseContent"></div>
+      </div>
+      <div class="briefing-col">
+        <p class="section-eyebrow">Ground rules</p>
+        <h2>8 principles for the road</h2>
+        <ol class="principles" id="principlesList"></ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== THE ROUTE ============================== -->
+  <section class="route-section" id="route">
+    <div class="route-header">
+      <p class="section-eyebrow">The full route</p>
+      <h2>28 phases, 8 legs of the journey</h2>
+      <p class="route-sub">Phases run mostly in sequence — but Git, DSA drilling, and building projects run <em>alongside</em> everything from Phase&nbsp;2 onward, not after it. At Phase&nbsp;20 the road forks into three optional specialisations before merging back for Phase&nbsp;24.</p>
+      <div class="route-controls">
+        <button class="chip-btn" id="expandAllBtn" type="button">Expand all</button>
+        <button class="chip-btn" id="collapseAllBtn" type="button">Collapse all</button>
+        <span class="route-controls-sep" aria-hidden="true">·</span>
+        <button class="chip-btn chip-btn-quiet" id="resetProgressBtn" type="button">Reset my progress</button>
+      </div>
+    </div>
+
+    <div class="route-track" id="routeTrack">
+      <!-- JS renders: part headers + phase stations + branch/remerge spine here -->
+    </div>
+  </section>
+
+  <!-- ============================== APPENDICES ============================== -->
+  <section class="appendix-section" id="appendices">
+    <p class="section-eyebrow">Reference</p>
+    <h2>The kit bag</h2>
+    <p class="route-sub">Six reference appendices to dip into whenever you need them — languages, tools, a master project list, curated learning resources, the mistakes that trip up everyone, and interview prep.</p>
+    <div class="appendix-grid" id="appendixGrid"></div>
+  </section>
+
+  <!-- ============================== FAQ ============================== -->
+  <section class="faq-section" id="faq">
+    <p class="section-eyebrow">Still wondering</p>
+    <h2>Frequently asked questions</h2>
+    <div class="faq-list" id="faqList"></div>
+  </section>
+
+  <!-- ============================== CLOSING ============================== -->
+  <section class="closing-section">
+    <p class="closing-text" id="closingText"></p>
+  </section>
+
+</main>
+
+<!-- ============================== FOOTER ============================== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#top" class="wordmark wordmark-footer">
+        <svg viewBox="0 0 100 100" class="wordmark-pin" aria-hidden="true">
+          <path d="M50 14 C50 14 26 42 26 63 A24 24 0 0 0 74 63 C74 42 50 14 50 14 Z" fill="none" stroke="currentColor" stroke-width="7"/>
+          <circle cx="50" cy="61" r="9" fill="currentColor"/>
+        </svg>
+        <span>Code<em>Yatra</em></span>
+      </a>
+      <p>An unofficial, self‑paced route through full‑stack development — built for learning out loud, not for LinkedIn brownie points.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Jump to</p>
+      <a href="#route">The route</a>
+      <a href="#appendices">Kit bag</a>
+      <a href="#faq">FAQ</a>
+      <a href="#top">Back to top</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Your journey</p>
+      <p class="footer-progress-line"><span id="footerProgressText">0 of 28 phases complete</span></p>
+      <button class="chip-btn chip-btn-quiet" id="footerResetBtn" type="button">Reset progress</button>
+    </div>
+
+    <div class="footer-col footer-col-copyright">
+      <p class="footer-heading">Rights</p>
+      <p>&copy; <span id="footerYear">2026</span> Mohd Sahil Tyagi. All rights reserved.</p>
+      <p class="footer-fine">Written and compiled by Mohd Sahil Tyagi. No part of this roadmap’s text may be reproduced or redistributed without permission.</p>
+    </div>
+  </div>
+  <div class="footer-strip">
+    <span>Last content update: <span id="footerUpdated"></span></span>
+    <span class="footer-strip-sep">·</span>
+    <span>Built with HTML, CSS &amp; vanilla JS — no framework, on brand.</span>
+  </div>
+</footer>
+
+<!-- ============================== TOAST ============================== -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="auth-guard.js"></script>
+<script src="content.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

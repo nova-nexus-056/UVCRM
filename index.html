@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Vibe Roadmap — Ship with AI without losing your mind</title>
+<meta name="description" content="A 13-phase roadmap for vibe coders. Build real products with AI without becoming a prompt-junkie who can't debug their own code.">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230A0812'/%3E%3Cpath d='M30 70 Q50 20 70 70' fill='none' stroke='%238B7FFF' stroke-width='7' stroke-linecap='round'/%3E%3Ccircle cx='50' cy='55' r='7' fill='%2338BDF8'/%3E%3C/svg%3E">
+
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' https://www.gstatic.com https://apis.google.com;
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  font-src 'self' https://fonts.gstatic.com;
+  img-src 'self' data: https://*.googleusercontent.com https://www.gstatic.com;
+  connect-src 'self' https://*.googleapis.com https://www.gstatic.com https://*.firebaseapp.com https://*.firebaseio.com;
+  frame-src https://www.google.com https://*.firebaseapp.com;
+  base-uri 'self';
+  form-action 'self';
+  object-src 'none';
+  upgrade-insecure-requests;
+">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- GATE — shown when opened directly (no Nova Nexus handshake) -->
+<div class="gate" id="gate" hidden>
+  <div class="gate-card">
+    <div class="gate-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="10" width="16" height="11" rx="2"/>
+        <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+      </svg>
+    </div>
+    <h1 class="gate-title">Access via Nova Nexus only</h1>
+    <p class="gate-text">
+      Vibe Roadmap is part of the Nova Nexus ecosystem. Create your free Nova Nexus account once,
+      then every Side Website recognizes you instantly — no second signup, ever.
+    </p>
+    <a class="gate-btn" href="https://nx-nova.vercel.app" id="gateBtn">
+      <span>Open Nova Nexus</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M13 6l6 6-6 6"/></svg>
+    </a>
+    <p class="gate-fine">Already have an account? Sign in at Nova Nexus and launch this Side Website from your dashboard.</p>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div class="app" id="app" hidden>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#top" class="wordmark">
+        <svg viewBox="0 0 100 100" class="wordmark-mark" aria-hidden="true">
+          <path d="M30 70 Q50 20 70 70" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+          <circle cx="50" cy="55" r="7" fill="currentColor" opacity="0.85"/>
+        </svg>
+        <span>Vibe<em>Roadmap</em></span>
+      </a>
+
+      <nav class="main-nav">
+        <a href="#route">Route</a>
+        <a href="#kit">Kit</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="header-tools">
+        <div class="search-wrap">
+          <button class="icon-btn" id="searchToggle" type="button" aria-label="Search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="16.2" y1="16.2" x2="21" y2="21" stroke-linecap="round"/></svg>
+          </button>
+          <div class="search-panel" id="searchPanel" hidden>
+            <div class="search-field">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="16.2" y1="16.2" x2="21" y2="21" stroke-linecap="round"/></svg>
+              <input type="search" id="searchInput" placeholder="Search phases, tools, 'cursor', 'prompt'…" autocomplete="off">
+              <kbd>Esc</kbd>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+          </div>
+        </div>
+
+        <button class="progress-pill" id="progressPill" type="button" aria-label="Progress">
+          <svg viewBox="0 0 36 36" class="progress-ring" aria-hidden="true">
+            <circle cx="18" cy="18" r="15.5" class="ring-track"/>
+            <circle cx="18" cy="18" r="15.5" class="ring-fill" id="ringFill"/>
+          </svg>
+          <span class="progress-text"><strong id="progressCount">0</strong>/<span id="progressTotal">13</span></span>
+        </button>
+
+        <div class="user-chip" id="userChip">
+          <span class="avatar" id="userAvatar">?</span>
+          <div class="user-chip-text">
+            <span class="user-chip-name" id="chipUsername">—</span>
+            <span class="user-chip-email" id="chipEmail">—</span>
+          </div>
+          <a href="https://nx-nova.vercel.app" class="chip-launch" title="Back to Nova Nexus" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          </a>
+        </div>
+
+        <button class="nav-burger" id="navBurger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobileNav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-nav" id="mobileNav" hidden>
+      <a href="#route">Route</a>
+      <a href="#kit">Kit</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </header>
+
+  <div class="scrollbar" aria-hidden="true"><div class="scrollbar-fill" id="scrollFill"></div></div>
+
+  <main id="top">
+
+    <section class="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <p class="hero-eyebrow">An ecosystem roadmap for the AI era</p>
+        <h1 class="hero-title">Ship real products <span class="hero-accent">with AI</span>.<br>Without becoming a <em>prompt-junkie</em>.</h1>
+        <p class="hero-sub">
+          Vibe coding got you building fast — great. Now let's make sure you can still <strong>read</strong>, <strong>debug</strong>,
+          and <strong>ship to production</strong> without falling apart the moment the AI hallucinates a function that doesn't exist.
+          Thirteen phases. Zero framework worship. Real products only.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#route" class="btn btn-primary">
+            <span>Start the route</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M13 6l6 6-6 6"/></svg>
+          </a>
+          <button class="btn btn-ghost" id="continueBtn" type="button" hidden>
+            <span>Continue where you left off</span>
+          </button>
+        </div>
+
+        <dl class="stat-board" id="statBoard">
+          <div class="stat-cell"><dt>Phases</dt><dd><span class="num" data-target="13">0</span></dd></div>
+          <div class="stat-cell"><dt>Parts</dt><dd><span class="num" data-target="4">0</span></dd></div>
+          <div class="stat-cell"><dt>Appendices</dt><dd><span class="num" data-target="4">0</span></dd></div>
+          <div class="stat-cell"><dt>Ship in</dt><dd class="stat-text">~6&ndash;10 wk</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="briefing">
+      <div class="briefing-inner">
+        <div class="briefing-col">
+          <p class="eyebrow">Before you start</p>
+          <h2>What this roadmap is (and isn't)</h2>
+          <div class="prose">
+            <p><strong>Vibe coding is real.</strong> In 2025 Andrej Karpathy coined the term for a workflow where you describe what you want and let AI generate the code — you mostly don't read it, you iterate by feeling. It works. People ship real products this way.</p>
+            <p><strong>But:</strong> the moment something breaks — and it will — you need to be able to read a stack trace, isolate a bug, and fix it. AI is an incredible force multiplier. It is not a substitute for understanding what you shipped.</p>
+            <p>This roadmap assumes you already know how to <em>start</em> a vibe project. It's about everything after that first "wow, it works" moment: shipping to real users, handling real bugs, and not becoming a passenger in your own codebase.</p>
+          </div>
+        </div>
+        <div class="briefing-col">
+          <p class="eyebrow">Ground rules</p>
+          <h2>7 principles for vibe coders</h2>
+          <ol class="principles" id="principlesList"></ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="route-section" id="route">
+      <div class="route-header">
+        <p class="eyebrow">The full route</p>
+        <h2>13 phases, 4 legs of the journey</h2>
+        <p class="route-sub">Phases run in order. From Phase 8 onward, you'll start writing some code by hand — on purpose. That's not a step back, it's the step that separates vibe <em>coders</em> from vibe <em>passengers</em>.</p>
+        <div class="route-controls">
+          <button class="chip-btn" id="expandAllBtn" type="button">Expand all</button>
+          <button class="chip-btn" id="collapseAllBtn" type="button">Collapse all</button>
+          <span class="sep">·</span>
+          <button class="chip-btn chip-quiet" id="resetProgressBtn" type="button">Reset progress</button>
+        </div>
+      </div>
+      <div class="route-track" id="routeTrack"></div>
+    </section>
+
+    <section class="kit-section" id="kit">
+      <p class="eyebrow">Reference</p>
+      <h2>The kit bag</h2>
+      <p class="route-sub">Four reference appendices for vibe coders — a tool masterlist, a prompt pattern library, stack recipes, and the mistakes that trip up every vibe coder eventually.</p>
+      <div class="kit-grid" id="kitGrid"></div>
+    </section>
+
+    <section class="faq-section" id="faq">
+      <p class="eyebrow">Still wondering</p>
+      <h2>Frequently asked questions</h2>
+      <div class="faq-list" id="faqList"></div>
+    </section>
+
+    <section class="closing">
+      <p id="closingText"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#top" class="wordmark">
+          <svg viewBox="0 0 100 100" class="wordmark-mark" aria-hidden="true">
+            <path d="M30 70 Q50 20 70 70" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="50" cy="55" r="7" fill="currentColor" opacity="0.85"/>
+          </svg>
+          <span>Vibe<em>Roadmap</em></span>
+        </a>
+        <p>A Side Website inside the Nova Nexus ecosystem. Built for people learning to ship real products with AI.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Jump to</p>
+        <a href="#route">The route</a>
+        <a href="#kit">Kit bag</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Your journey</p>
+        <p class="footer-progress" id="footerProgress">0 of 13 phases complete</p>
+        <button class="chip-btn chip-quiet" id="footerResetBtn" type="button">Reset progress</button>
+      </div>
+      <div class="footer-col footer-copy">
+        <p class="footer-heading">Nova Nexus</p>
+        <p>&copy; <span id="footerYear">2026</span> Vibe Roadmap</p>
+        <p class="fine">A community roadmap, not a certification. Re-check tool-specific advice every 3&ndash;6 months.</p>
+      </div>
+    </div>
+    <div class="footer-strip">
+      <span>Last content update: <span id="footerUpdated">—</span></span>
+      <span class="sep">·</span>
+      <span>Part of the <a href="https://nx-nova.vercel.app" target="_blank" rel="noopener">Nova Nexus</a> ecosystem</span>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box" id="modalBox"></div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-check-compat.js"></script>
+<script src="content.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
